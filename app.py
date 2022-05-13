@@ -19,7 +19,7 @@ else:
     consulta = df_2020
 
 #Titulo de la pagina
-st.title("Calculadora Bono Desempeño Laboral AÑO "  + str(anio)  )
+st.write(""" ## Calculadora Bono Desempeño Laboral """)
 
 # Barra lateral
 with st.sidebar:
