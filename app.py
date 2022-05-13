@@ -19,7 +19,7 @@ else:
     consulta = df_2020
 
 #Titulo de la pagina
-st.title("🪪 Calculadora BDL AÑO "  + str(anio)  )
+st.title("Calculadora Bono Desempeño Laboral AÑO "  + str(anio)  )
 
 # Barra lateral
 with st.sidebar:
@@ -31,7 +31,7 @@ with st.sidebar:
     establecimiento_choice = st.selectbox("Establecimiento", establecimientos,index=0) 
     no_anios_servicio = st.selectbox("Años de servicio", ["Mayor a diez años", "Menor o igual a diez años"], index=0)   
     horas_contrato = st.number_input("Ingrese horas de contrato", min_value=0.0, max_value=45.0, value=44.0,step=0.5, format="%.1f")
-    escolaridad = st.selectbox("Nivel de escolaridad", ["Completa", "Incompleta"], index=0)
+    escolaridad = st.selectbox("Enseñanza media completa", ["Completa", "Incompleta"], index=0)
     nombre_establecimiento = consulta['NOMBRE_ESTABLECIMIENTO'].loc[consulta["CODIGO_ESTABLECIMIENTO"] == establecimiento_choice].unique()
     asistencia_promedio_anual_establ = 0
     submitted = st.button("Consultar")
@@ -50,7 +50,7 @@ st.write(f""" ### Tu selección es la siguiente:
 
 
 if submitted:
-    st.balloons()
+
     st.success("🎉 Su consulta ha sido generada!")
     get_asistencia_promedio_anual = consulta["ASISTENCIA_PROMEDIO_ANUAL_DEL_ESTABLECIMIENTO"].loc[(consulta["COMUNA"] == comuna_choice) & (consulta["CODIGO_ESTABLECIMIENTO"] == establecimiento_choice)].unique()
     asistencia_promedio_anual_establ = get_asistencia_promedio_anual[0]
@@ -134,7 +134,7 @@ if submitted:
 
     st.write(f"""
         * Las cuotas y el valor total a pagar son valores estimados.
-        * Asistencia promedio anual del establecimiento, obtenido por sistema: {asistencia_promedio_anual_establ}
+        * En caso de presentar dudas comunicarse al correo correo_vtf@junji.cl
      """)
 
     
