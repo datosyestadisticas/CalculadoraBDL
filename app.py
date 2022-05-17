@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+
 # Leer archivos CSV
 df_2020 = pd.read_csv("BDL2020V2.csv", delimiter=",")
 df_2021 = pd.read_csv("BDL2021V2.csv", delimiter=",")
@@ -20,6 +21,16 @@ else:
 
 #Titulo de la pagina
 st.write(""" ## Calculadora Bono Desempeño Laboral """)
+
+
+s = f"""
+<style>
+div.stButton > button:first-child {{ border: 1px solid; border-radius:10px; background-color: #00cc00;color:white; height:3em; width:18em}}
+<style>
+"""
+st.markdown(s, unsafe_allow_html=True)
+
+
 
 # Barra lateral
 with st.sidebar:
@@ -150,6 +161,7 @@ if submitted:
         * Cálculo de escolaridad: {calculo_escolaridad} 
             (20 si es completa, 10 si es incompleta)
         * Cálculo IGE: {calculo_ige}
+            (Suma de los 3 valores anteriormente calculados)
       
 """)
 
