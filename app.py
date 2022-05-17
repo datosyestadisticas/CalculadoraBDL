@@ -36,13 +36,12 @@ with st.sidebar:
     asistencia_promedio_anual_establ = 0
     submitted = st.button("Consultar")
 
-st.write(f""" ### Tu selección es la siguiente:
+
+st.write(f""" ### Su selección es la siguiente:
 
         ESTABLECIMIENTO {establecimiento_choice} - {nombre_establecimiento[0]}
 
-        Año de cálculo: {anio}
-        Región del establecimiento: {region_choice}
-        Comuna del establecimiento: {comuna_choice}
+        Año de cálculo: {anio} 
         Años de servicio de consultante: {no_anios_servicio}
         Horas de contrato del consultante: {horas_contrato}
         Escolaridad consultante: {escolaridad}
@@ -51,7 +50,7 @@ st.write(f""" ### Tu selección es la siguiente:
 
 if submitted:
 
-    st.success("🎉 Su consulta ha sido generada!")
+    #st.success("🎉 Su consulta ha sido generada!")
     get_asistencia_promedio_anual = consulta["ASISTENCIA_PROMEDIO_ANUAL_DEL_ESTABLECIMIENTO"].loc[(consulta["COMUNA"] == comuna_choice) & (consulta["CODIGO_ESTABLECIMIENTO"] == establecimiento_choice)].unique()
     asistencia_promedio_anual_establ = get_asistencia_promedio_anual[0]
     
@@ -122,7 +121,7 @@ if submitted:
 
     
     
-    st.write(f""" ### La respuesta del sistema es la siguiente: """)
+    st.write(f""" ### El resultado de acuerdo a su selección es la siguiente: """)
 
     col1, col2, col3 = st.columns(3)
 
@@ -134,8 +133,25 @@ if submitted:
 
     st.write(f"""
         * Las cuotas y el valor total a pagar son valores estimados.
-        * En caso de presentar dudas comunicarse al correo correo_vtf@junji.cl
+        * En caso de presentar dudas comunicarse con el empleador.
      """)
+
+    st.write(f""" ### 
+
+        DE ACUERDO A SU SELECCIÓN, EL VALOR PONDERADO ES EL SIGUIENTE:
+
+        * Asistencia promedio anual del establecimiento: {asistencia_promedio_anual_establ} 
+            (Según lo informado por empleador)
+            Cálculo de asistencia: {calculo_asistencia} 
+            (30 si asistencia promedio anual del establecimiento es mayor
+            o igual, 15 si es menor o igual)
+        * Cálculo años de servicio: {calculo_anios_servicio} 
+            (30 si son mayor a 10 años, 15 si es menor o igual a 10 años)
+        * Cálculo de escolaridad: {calculo_escolaridad} 
+            (20 si es completa, 10 si es incompleta)
+        * Cálculo IGE: {calculo_ige}
+      
+""")
 
     
 
