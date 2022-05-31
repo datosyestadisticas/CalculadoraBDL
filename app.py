@@ -147,6 +147,8 @@ if submitted:
         * En caso de presentar dudas comunicarse con el empleador.
      """)
 
+
+    asistencia_promedio_anual_establ = '{0:.3g}'.format(asistencia_promedio_anual_establ)
     st.write(f""" ### 
 
         DE ACUERDO A SU SELECCIÓN, EL VALOR PONDERADO ES EL SIGUIENTE:
