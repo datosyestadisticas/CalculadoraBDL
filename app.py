@@ -40,12 +40,12 @@ with st.sidebar:
     comuna_choice = st.selectbox("Comuna del establecimiento",comunas,index=0)
     establecimientos = consulta["CODIGO_ESTABLECIMIENTO"].loc[consulta["COMUNA"] == comuna_choice].unique()
     establecimiento_choice = st.selectbox("Establecimiento", establecimientos,index=0) 
-    no_anios_servicio = st.selectbox("Años de servicio", ["Mayor a diez años", "Menor o igual a diez años"], index=0)   
+    no_anios_servicio = st.selectbox("Años de servicio", ["MAYOR O IGUAL A 10 AÑOS", "MENOR A 10 AÑOS"], index=0)   
     horas_contrato = st.number_input("Ingrese horas de contrato", min_value=0.0, max_value=45.0, value=44.0,step=0.5, format="%.1f")
-    escolaridad = st.selectbox("Enseñanza media completa", ["Completa", "Incompleta"], index=0)
+    escolaridad = st.selectbox("Enseñanza media completa", ["COMPLETA", "INCOMPLETA"], index=0)
     nombre_establecimiento = consulta['NOMBRE_ESTABLECIMIENTO'].loc[consulta["CODIGO_ESTABLECIMIENTO"] == establecimiento_choice].unique()
     asistencia_promedio_anual_establ = 0
-    submitted = st.button("Consultar")
+    submitted = st.button("CONSULTAR")
 
 
 st.write(f""" ### Su selección es la siguiente:
@@ -55,7 +55,7 @@ st.write(f""" ### Su selección es la siguiente:
         Año de cálculo: {anio} 
         Años de servicio de consultante: {no_anios_servicio}
         Horas de contrato del consultante: {horas_contrato}
-        Escolaridad consultante: {escolaridad}
+        Enseñanza Media: {escolaridad}
 """)
 
 
@@ -66,10 +66,10 @@ if submitted:
     asistencia_promedio_anual_establ = get_asistencia_promedio_anual[0]
     
     
-    calculo_anios_servicio = 30 if no_anios_servicio == "Mayor a diez años" else 15
+    calculo_anios_servicio = 30 if no_anios_servicio >= "MAYOR O IGUAL A 10 AÑOS" else 15
      # Calculo Escolaridad no es una formula es un input
     
-    calculo_escolaridad = 20 if escolaridad == "Completa" else 10
+    calculo_escolaridad = 20 if escolaridad == "COMPLETA" else 10
     calculo_asistencia = 30 if asistencia_promedio_anual_establ >= 90 else 15
     # Siempre es 0 ?
     calculo_simce = 0
@@ -103,8 +103,8 @@ if submitted:
         monto_a_pago_segun_horas_contrato = int((valor_segun_tramo_ige / 44) * horas_contrato if horas_contrato < 44 else valor_segun_tramo_ige)
 
 
-        pago_cuota_1 = int(np.ceil(monto_a_pago_segun_horas_contrato / 2))
-        pago_cuota_2 = int(np.floor(monto_a_pago_segun_horas_contrato / 2))
+        pago_cuota_1 = int(monto_a_pago_segun_horas_contrato / 2)
+        pago_cuota_2 = int(monto_a_pago_segun_horas_contrato - pago_cuota_1)
 
         # st.write("Valores redondedos" + str(np.ceil(monto_a_pago_segun_horas_contrato / 2)) )
         # st.write("Valores redondedos" + str(np.floor(monto_a_pago_segun_horas_contrato / 2)) )
@@ -128,7 +128,7 @@ if submitted:
 
 
         pago_cuota_1 = int(monto_a_pago_segun_horas_contrato / 2)
-        pago_cuota_2 = int(monto_a_pago_segun_horas_contrato / 2)
+        pago_cuota_2 = int(monto_a_pago_segun_horas_contrato - pago_cuota_1)
 
     
     
@@ -142,13 +142,13 @@ if submitted:
 
 
 
-    st.write(f"""
-        * Las cuotas y el valor total a pagar son valores estimados.
-        * En caso de presentar dudas comunicarse con el empleador.
-     """)
+    #st.write(f"""
+    #    * Las cuotas y el valor total a pagar son valores estimados.
+    #    * En caso de presentar dudas comunicarse con el empleador.
+    #""")
 
 
-    asistencia_promedio_anual_establ = '{0:.3g}'.format(asistencia_promedio_anual_establ)
+    asistencia_promedio_anual_establ = '{0:.4g}'.format(asistencia_promedio_anual_establ)
     st.write(f""" ### 
 
         DE ACUERDO A SU SELECCIÓN, EL VALOR PONDERADO ES EL SIGUIENTE:
@@ -156,13 +156,13 @@ if submitted:
         * Asistencia promedio anual del establecimiento: {asistencia_promedio_anual_establ} 
             (Según lo informado por empleador)
             Cálculo de asistencia: {calculo_asistencia} 
-            (30 si asistencia promedio anual del establecimiento es mayor
-            o igual, 15 si es menor o igual)
+            (30% si asistencia promedio anual del establecimiento es mayor
+            o igual, 15% si es menor o igual)
         * Cálculo años de servicio: {calculo_anios_servicio} 
             (30 si son mayor a 10 años, 15 si es menor o igual a 10 años)
         * Cálculo de escolaridad: {calculo_escolaridad} 
             (20 si es completa, 10 si es incompleta)
-        * Cálculo IGE: {calculo_ige}
+        * Cálculo de Índice General de Evaluación (IGE): {calculo_ige}
             (Suma de los 3 valores anteriormente calculados)
       
 """)
