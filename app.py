@@ -20,7 +20,7 @@ else:
     consulta = df_2020
 
 #Titulo de la pagina
-st.write(""" ## Calculadora Bono Desempeño Laboral """)
+st.write(""" ## Simulador Bono Desempeño Laboral """)
 
 
 s = f"""
@@ -153,16 +153,16 @@ if submitted:
 
         DE ACUERDO A SU SELECCIÓN, EL VALOR PONDERADO ES EL SIGUIENTE:
 
-        * Asistencia promedio anual del establecimiento: {asistencia_promedio_anual_establ} 
+        * Asistencia promedio anual del establecimiento: {asistencia_promedio_anual_establ}% 
             (Según lo informado por empleador)
-            Cálculo de asistencia: {calculo_asistencia} 
+            Cálculo de asistencia: {calculo_asistencia}% 
             (30% si asistencia promedio anual del establecimiento es mayor
-            o igual, 15% si es menor o igual)
-        * Cálculo años de servicio: {calculo_anios_servicio} 
-            (30 si son mayor a 10 años, 15 si es menor o igual a 10 años)
-        * Cálculo de escolaridad: {calculo_escolaridad} 
-            (20 si es completa, 10 si es incompleta)
-        * Cálculo de Índice General de Evaluación (IGE): {calculo_ige}
+            o igual a 90%, 15% si es menor)
+        * Cálculo años de servicio: {calculo_anios_servicio}% 
+            (30% si son mayor o igual a 10 años, 15% si es menor)
+        * Cálculo de escolaridad: {calculo_escolaridad}% 
+            (20% si es completa, 10% si es incompleta)
+        * Cálculo de Índice General de Evaluación (IGE): {calculo_ige}%
             (Suma de los 3 valores anteriormente calculados)
       
 """)
