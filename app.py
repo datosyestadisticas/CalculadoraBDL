@@ -66,7 +66,7 @@ if submitted:
     asistencia_promedio_anual_establ = get_asistencia_promedio_anual[0]
     
     
-    calculo_anios_servicio = 30 if no_anios_servicio >= "MAYOR O IGUAL A 10 AÑOS" else 15
+    calculo_anios_servicio = 30 if no_anios_servicio == "MAYOR O IGUAL A 10 AÑOS" else 15
      # Calculo Escolaridad no es una formula es un input
     
     calculo_escolaridad = 20 if escolaridad == "COMPLETA" else 10
