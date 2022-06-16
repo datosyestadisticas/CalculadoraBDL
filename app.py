@@ -72,7 +72,7 @@ if submitted:
     calculo_escolaridad = 20 if escolaridad == "COMPLETA" else 10
     calculo_asistencia = 30 if asistencia_promedio_anual_establ >= 90 else 15
     # Siempre es 0 ?
-    calculo_simce = 0
+    calculo_simce = 20
     # Existen rut con ;? o bien se suma solamente
     calculo_ige = calculo_anios_servicio + calculo_escolaridad + calculo_asistencia + calculo_simce
 
