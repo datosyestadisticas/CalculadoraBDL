@@ -163,7 +163,8 @@ if submitted:
         * Cálculo de escolaridad: {calculo_escolaridad}% 
             (20% si es completa, 10% si es incompleta)
         * Cálculo de Índice General de Evaluación (IGE): {calculo_ige}%
-            (Suma de los 3 valores anteriormente calculados más el 20% correspondiente a la variable SIMCE)
+            (Suma de los 3 valores anteriormente calculados más el 20% 
+            correspondiente a la variable SIMCE)
       
 """)
 
